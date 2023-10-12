@@ -22,7 +22,7 @@ This script will scrape the following information from booking.com:
 today = date.today()
 
 def municipios():
-    municipios = pd.read_csv(r"D:\Documents\booking_scraper\municipios.csv")
+    municipios = pd.read_csv(r"C:\Users\DELL\Esteban\Web Scraping\booking_scraper\municipios.csv")
     df = pd.DataFrame(municipios)
     Lista = {col: df[col].dropna().tolist() for col in df.columns}
     return Lista
@@ -84,7 +84,7 @@ def main():
             df["Municipio"]= destination
             df["url"]= page_url
             df["fecha_consulta"]= today
-            rute =r"D:\Documents\booking_scraper\hotels_list.xlsx"
+            rute =r"C:\Users\DELL\Esteban\Web Scraping\booking_scraper\hotels_list.xlsx"
             if os.path.exists(rute):
                 df1 = pd.read_excel(rute)
                 pd.concat([df1, df]).to_excel(rute, index=False)
