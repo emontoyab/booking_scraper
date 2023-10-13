@@ -1,3 +1,6 @@
+#Activar entorno virtual .\venv\Scripts\activate
+# correr código  py .\booking_scraper.py
+
 from playwright.sync_api import sync_playwright
 import pandas as pd
 import os.path
