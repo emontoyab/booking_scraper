@@ -48,7 +48,7 @@ def main():
         room = 1
         children = 0
 
-        lista = [offset for offset in range(525,1000, 25)]
+        lista = [offset for offset in range(1000,1375, 25)]
 
 
         for  offset  in lista:
