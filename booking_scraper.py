@@ -42,13 +42,13 @@ def main():
         # IMPORTANT: Change dates to future dates, otherwise it won't work
         checkin_date = '2023-11-17' #Cambio de fechas
         checkout_date = '2023-11-18'
-        destination = (Lista["Nombre Municipio"][86])
+        destination = (Lista["Nombre Municipio"][0])
         destination = destination
         adult = 2
         room = 1
         children = 0
 
-        lista = [offset for offset in range(0,75, 25)]
+        lista = [offset for offset in range(500,525, 25)]
 
 
         for  offset  in lista:
