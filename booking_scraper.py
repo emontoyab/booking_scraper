@@ -42,7 +42,7 @@ def main():
         # IMPORTANT: Change dates to future dates, otherwise it won't work
         checkin_date = '2023-11-17' #Cambio de fechas
         checkout_date = '2023-11-18'
-        destination = (Lista["Nombre Municipio"][118])
+        destination = (Lista["Nombre Municipio"][112])
         destination = destination
         adult = 2
         room = 1
