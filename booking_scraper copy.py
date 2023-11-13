@@ -24,6 +24,8 @@ This script will scrape the following information from booking.com:
 """
 today = date.today()
 
+# Lee el archivo de ingreso de municipios y lo convierte en un diccionario, 
+# con valor= nombre_columna y clave= valores_columna
 def municipios():
     municipios = pd.read_csv(r"C:\Users\DELL\Esteban\Web Scraping\booking_scraper\municipios.csv")
     df = pd.DataFrame(municipios)
@@ -40,27 +42,36 @@ def main():
     with sync_playwright() as p:
         
         # IMPORTANT: Change dates to future dates, otherwise it won't work
-        checkin_date = '2023-11-17' #Cambio de fechas
+        checkin_date = '2023-11-17' #Cambio de fechas --> Esto quizás podría hacerse con búsqueda flexible
         checkout_date = '2023-11-18'
-        destination = (Lista["Nombre Municipio"][0])
+        destination = (Lista["Nombre Municipio"][0]) #La posición especifica cuál municipio se va a cargar,
+        #                                             Esto es lo que se debería automatizar
         destination = destination
         adult = 2
         room = 1
         children = 0
 
-        lista = [offset for offset in range(1000,1375, 25)]
+        lista = [offset for offset in range(1000,1375, 25)] # Corresponde a los resultados a consultar,  ej 
+                                                            #(0,200,25) serían 200 valores con 25 resultados por página 
 
+        # Esto anterior se podría detener cuando no encuentre más resultados, para ser más eficiente
+        # También se podría buscar la forma de saber cuántos resultados se entregan por búsqueda y poner
+        # algo así: range(1000,num_resultados,25), con num_resultados como variable que dependa de la búsqueda
 
         for  offset  in lista:
 
             page_url = f'https://www.booking.com/searchresults.es.html?checkin={checkin_date}&checkout={checkout_date}&selected_currency=COP&ss={destination}&ssne={destination}&ssne_untouched={destination}&lang=es&sb=1&src_elem=sb&src=searchresults&dest_type=city&group_adults={adult}&no_rooms={room}&group_children={children}&sb_travel_purpose=leisure&offset={offset}'
 
+            #Analizar mejor estos parámetros (headless, timeout)
             browser = p.chromium.launch(headless=False)
             page = browser.new_page()
             page.goto(page_url, timeout=60000)
                         
             hotels = page.locator('//div[@data-testid="property-card"]').all()
-            print(f'There are: {len(hotels)} hotels.')
+            print(f'There are: {len(hotels)} hotels.') # --> Aquí tal vez podría limitarse, 
+            #                                           si len(hotels) es menor que 25, break
+
+
 
             hotels_list = []
             for hotel in hotels:
