@@ -5,6 +5,7 @@ from playwright.sync_api import sync_playwright
 import pandas as pd
 import os.path
 from datetime import date
+import time
 """
 This script will scrape the following information from booking.com:
 - Hotel name
@@ -22,6 +23,7 @@ This script will scrape the following information from booking.com:
 - Number of days
 - Date of the search
 """
+inicio = time.time()
 today = date.today()
 
 # Lee el archivo de ingreso de municipios y lo convierte en un diccionario, 
@@ -430,3 +432,5 @@ with pd.ExcelWriter('booking_clean.xlsx') as writer:
     df_ant.to_excel(writer, sheet_name='Antioquia')
     df_med.to_excel(writer, sheet_name='Medellin')
 
+fin = time.time()
+print(f"Tiempo ejecución: {fin-inicio} segundos")
